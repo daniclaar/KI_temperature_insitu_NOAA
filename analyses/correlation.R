@@ -72,7 +72,8 @@ p[10,9] <- 1
 
 # Create pdf of correlation plot
 pdf(file = "figures/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
-corrplot.mixed(corr, upper = "circle", lower.col = "gray50", 
+corrplot.mixed(corr, upper = "circle",  
+               lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
                number.digits=3, cl.lim = c(0.8,1),is.corr = FALSE,
                upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
