@@ -1,7 +1,24 @@
-load("data")
+# Clear working environment
+rm(list=ls())
 
+# Load necessary packages
+library(corrplot)
 
+# Load necessary data
+load("data/KI_SB_temp_1d.RData")
+load("data/NOAA_CoralTemp_2011_2018.RData")
+
+# Exploratory correlations
 corr <- ccf(sst_region$sst_BOW,sst_region$sst_vaskess)
+corr <- ccf(bayofwrecks_1d$temperature_1d,sst_BOW$sst,na.action=na.exclude,lag.max = 730)
+corr <- ccf(northlagoon_1d$temperature_1d,sst_northlagoon$sst,na.action=na.exclude,lag.max = 730)
+corr <- ccf(southlagoon_1d$temperature_1d,sst_southlagoon$sst,na.action=na.exclude,lag.max = 30)
+corr <- ccf(vaskesbay_1d$temperature_1d,sst_vaskess$sst,na.action=na.exclude,lag.max = 30)
+corr <- ccf(vaskesbay_1d$temperature_1d,northshore_1d$temperature_1d,na.action=na.exclude,lag.max = 30)
+# corr <- ccf(vaskesbay_1d$temperature_1d[c(1774:2140)],sst_vaskess$sst[c(1774:2140)],na.action=na.pass,lag.max = 30)
+corr$lag[which.max(corr$acf)]
+plot(corr,ylim=c(0.7,1),main="Vaskess Bay")
+
 
 #https://anomaly.io/detect-correlation-time-series/
 correlationTable = function(graphs) {
@@ -11,19 +28,54 @@ correlationTable = function(graphs) {
     print(graph1Id)
     for(graph2Id in 1:length(graphs)) {
       graph2 = graphs[[graph2Id]]
-      if(graph1Id == graph2Id){
-        break;
-      } else {
-        correlation = ccf(graph1, graph2, lag.max = 0)
-        cross[graph1Id, graph2Id] = correlation$acf[1]
+      correlation = ccf(graph1, graph2, lag.max = 0,na.action = na.exclude)
+      # correlation = ccf(graph1, graph2, lag.max = 0)
+      cross[graph1Id, graph2Id] = correlation$acf[1]
       }
     }
-  }
   cross
 }
 
-graphs <- sst_region[,c(2:6)]
+sst_insitu_region <- cbind(sst_region[c(1:2192),],
+                           "insitu_BOW" = bayofwrecks_1d$temperature_1d,
+                           "insitu_northlagoon" = northlagoon_1d$temperature_1d,
+                           "insitu_southlagoon" = southlagoon_1d$temperature_1d,
+                           "insitu_vaskess" = vaskesbay_1d$temperature_1d,
+                           "insitu_northshore" = northshore_1d$temperature_1d)
+
+# Choose what to compare (all in situ and all satellite SST)
+graphs <- sst_insitu_region[,c(2:11)]
+# Run correlationTable
 corr = correlationTable(graphs)
 
-corr[2,1]
-corr
+# colnames(corr) <- names(sst_insitu_region[2:11])
+# rownames(corr) <- names(sst_insitu_region[2:11])
+
+colnames(corr) <- c("Bay of Wrecks (S)", "North Lagoon (S)", "South Lagoon (S)",
+                    "Vaskess Bay (S)", "North Shore (S)","Bay of Wrecks (I)", 
+                    "North Lagoon (I)", "South Lagoon (I)", 
+                    "Vaskess Bay (I)","North Shore (I)")
+rownames(corr) <- c("Bay of Wrecks (S)", "North Lagoon (S)", "South Lagoon (S)",
+                    "Vaskess Bay (S)", "North Shore (S)","Bay of Wrecks (I)", 
+                    "North Lagoon (I)", "South Lagoon (I)", 
+                    "Vaskess Bay (I)","North Shore (I)")
+
+# Removed - insufficient overlap between these two sites - only 62 days
+vaskess_northshore_overlap <- sst_insitu_region[which(sst_insitu_region$insitu_northshore!="NaN" & sst_insitu_region$insitu_vaskess!="NaN"),]
+
+plot(vaskess_northshore_overlap$date,vaskess_northshore_overlap$insitu_northshore)
+nrow(vaskess_northshore_overlap)
+# Use simulated p-value matrix: can be used to cross out certain values in the correlation matrix
+p <- matrix(0.05,10,10)
+p[9,10] <- 1
+p[10,9] <- 1
+
+# Create pdf of correlation plot
+pdf(file = "figures/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
+corrplot.mixed(corr, upper = "circle", lower.col = "gray50", 
+               number.cex = 0.85,tl.pos = "lt",
+               number.digits=3, cl.lim = c(0.8,1),is.corr = FALSE,
+               upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               tl.col="black",tl.srt=45,outline="darkgray",
+               p.mat=p,sig.level=0.05,pch.col="darkgray",pch.cex=3)
+dev.off()
