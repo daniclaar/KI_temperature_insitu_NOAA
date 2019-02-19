@@ -46,6 +46,6 @@ SL <- plot_temps(southlagoon_1d,sst_southlagoon)+guides(color=FALSE)+
                                tz="Pacific/Kiritimati"),
            y=30.5, label="South Lagoon")
 
-pdf(file = "plots/KI_insitu_satellite_temps.pdf", width = 7.5, height = 10, useDingbats = FALSE)
+pdf(file = "figures/KI_insitu_satellite_temps.pdf", width = 7.5, height = 10, useDingbats = FALSE)
 grid.arrange(VB,SL,NL,NS,BOW, nrow=5)
 dev.off()
