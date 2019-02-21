@@ -25,7 +25,7 @@ plot_temps(northshore_1d,sst_northshore)
 plot_temps(vaskesbay_1d,sst_vaskess)
 plot_temps(southlagoon_1d,sst_southlagoon)
 
-BOW <- plot_temps(bayofwrecks_1d,sst_BOW)+
+BOW <- plot_temps(bayofwrecks_1d,sst_BOW)+guides(color=FALSE)+
   annotate("text",x=as.POSIXct("2018/1/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
            y=30.5, label="Bay of Wrecks")
@@ -37,7 +37,7 @@ NS <- plot_temps(northshore_1d,sst_northshore)+guides(color=FALSE)+
   annotate("text",x=as.POSIXct("2018/1/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
            y=30.5, label="North Shore")
-VB <- plot_temps(vaskesbay_1d,sst_vaskess)+guides(color=FALSE)+
+VB <- plot_temps(vaskesbay_1d,sst_vaskess)+
   annotate("text",x=as.POSIXct("2018/1/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
            y=30.5, label="Vaskess Bay")
