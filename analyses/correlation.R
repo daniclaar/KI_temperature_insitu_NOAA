@@ -75,7 +75,7 @@ pdf(file = "figures/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
-               number.digits=3, cl.lim = c(0.8,1),is.corr = FALSE,
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
                upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
                tl.col="black",tl.srt=45,outline="darkgray",
                p.mat=p,sig.level=0.05,pch.col="darkgray",pch.cex=3)
@@ -104,7 +104,7 @@ pdf(file = "figures/corr_plot_2011to2013_noVaskessI.pdf",width=8,height=7,useDin
 corrplot.mixed(corr2, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
-               number.digits=3, cl.lim = c(0.7,1),is.corr = FALSE,
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
                upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
                tl.col="black",tl.srt=45,outline="darkgray",
                pch.col="darkgray",pch.cex=3)
@@ -133,7 +133,7 @@ pdf(file = "figures/corr_plot_2015to2016_noNorthShoreI.pdf",width=8,height=7,use
 corrplot.mixed(corr3, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
-               number.digits=3, cl.lim = c(0.8,1),is.corr = FALSE,
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
                upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
                tl.col="black",tl.srt=45,outline="darkgray",
                pch.col="darkgray",pch.cex=3)
