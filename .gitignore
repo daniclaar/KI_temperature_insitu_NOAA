@@ -2,3 +2,5 @@ packrat/lib*/
 .Rproj.user
 data/NOAA_CoralTemp/*
 ms/~*
+.Rhistory
+data/NOAA_DHW_3.1/*
