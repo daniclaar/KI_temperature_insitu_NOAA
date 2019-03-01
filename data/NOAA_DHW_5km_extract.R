@@ -177,5 +177,8 @@ colnames(dhw_region)[6] <- "dhw_BOW"
 # Remove unneccessary objects
 rm(dhw,dhw_full,nc,dhwlist,nc,i,lat,lon,LatIdx,LonIdx,nlat,nlon)
 
+# Take the mean of all 5 regions 
+dhw_mean_KI <- data.frame("date"=dhw_region$date, "dhw"=rowMeans(dhw_region[,c(2:6)]))
+
 #Save RData file for downstream use
 save.image(file="data/NOAA_DHW_5km.RData")
