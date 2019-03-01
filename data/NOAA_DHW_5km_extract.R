@@ -44,7 +44,6 @@ flush.console()
 
 dhw <- do.call(rbind, dhwlist)
 dhw_northshore <- data.frame(dhw)
-colnames(dhw_northshore) <- c("id","dhw")
 
 dhw_northshore$date <- rownames(dhw_northshore)
 dhw_northshore$date <- gsub(x = dhw_northshore$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
@@ -73,7 +72,6 @@ for (i in files) {
 
 dhw <- do.call(rbind, dhwlist)
 dhw_vaskess <- data.frame(dhw)
-colnames(dhw_vaskess) <- c("id","dhw")
 
 dhw_vaskess$date <- rownames(dhw_vaskess)
 dhw_vaskess$date <- gsub(x = dhw_vaskess$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
@@ -102,7 +100,6 @@ for (i in files) {
 
 dhw <- do.call(rbind, dhwlist)
 dhw_southlagoon <- data.frame(dhw)
-colnames(dhw_southlagoon) <- c("id","dhw")
 
 dhw_southlagoon$date <- rownames(dhw_southlagoon)
 dhw_southlagoon$date <- gsub(x = dhw_southlagoon$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
@@ -131,7 +128,6 @@ for (i in files) {
 
 dhw <- do.call(rbind, dhwlist)
 dhw_BOW <- data.frame(dhw)
-colnames(dhw_BOW) <- c("id","dhw")
 
 dhw_BOW$date <- rownames(dhw_BOW)
 dhw_BOW$date <- gsub(x = dhw_BOW$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
@@ -160,7 +156,6 @@ for (i in files) {
 
 dhw <- do.call(rbind, dhwlist)
 dhw_northlagoon <- data.frame(dhw)
-colnames(dhw_northlagoon) <- c("id","dhw")
 
 dhw_northlagoon$date <- rownames(dhw_northlagoon)
 dhw_northlagoon$date <- gsub(x = dhw_northlagoon$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
@@ -170,14 +165,17 @@ dhw_northlagoon$date <- as.POSIXct(dhw_northlagoon$date,format="%Y%m%d")
 dhw_northlagoon_max <- max(dhw_northlagoon$dhw)
 dhw_northlagoon[which(dhw_northlagoon$dhw==max(dhw_northlagoon$dhw)),]
 
-dhw_dist <- merge(dhw_northshore,dhw_vaskess, by="date",
+dhw_region <- merge(dhw_northshore,dhw_vaskess, by="date",
                   suffixes = c("_northshore","_vaskess"))
-dhw_dist <- merge(dhw_dist, dhw_southlagoon, by="date")
-colnames(dhw_dist)[4] <- "dhw_southlagoon"
-dhw_dist <- merge(dhw_dist, dhw_northlagoon, by="date")
-colnames(dhw_dist)[5] <- "dhw_northlagoon"
-dhw_dist <- merge(dhw_dist, dhw_BOW, by="date")
-colnames(dhw_dist)[6] <- "dhw_BOW"
+dhw_region <- merge(dhw_region, dhw_southlagoon, by="date")
+colnames(dhw_region)[4] <- "dhw_southlagoon"
+dhw_region <- merge(dhw_region, dhw_northlagoon, by="date")
+colnames(dhw_region)[5] <- "dhw_northlagoon"
+dhw_region <- merge(dhw_region, dhw_BOW, by="date")
+colnames(dhw_region)[6] <- "dhw_BOW"
 
+# Remove unneccessary objects
+rm(dhw,dhw_full,nc,dhwlist,nc,i,lat,lon,LatIdx,LonIdx,nlat,nlon)
 
+#Save RData file for downstream use
 save.image(file="data/NOAA_DHW_5km.RData")
