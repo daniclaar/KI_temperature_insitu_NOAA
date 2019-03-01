@@ -3,6 +3,7 @@ rm(list=ls())
 
 # Load necessary packages
 library(ggplot2)
+library(gridExtra)
 
 # Load necessary data
 load("data/KI_SB_temp_1d.RData")
