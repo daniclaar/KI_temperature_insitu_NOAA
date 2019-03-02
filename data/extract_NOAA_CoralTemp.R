@@ -1,10 +1,7 @@
-
 # Load necessary packages
 library(ncdf4)
-# library(chron)
 library(lattice)
 library(RColorBrewer)
-# require(svMisc)
 
 # Clear the working environment
 rm(list=ls())
@@ -45,7 +42,6 @@ for (i in files) {
 
 sst <- do.call(rbind, sstlist)
 sst_northshore <- data.frame(sst)
-# colnames(sst_northshore) <- c("id","sst")
 
 sst_northshore$date <- rownames(sst_northshore)
 sst_northshore$date <- gsub(x = sst_northshore$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
@@ -70,7 +66,6 @@ for (i in files) {
 
 sst <- do.call(rbind, sstlist)
 sst_vaskess <- data.frame(sst)
-# colnames(sst_vaskess) <- c("id","sst")
 
 sst_vaskess$date <- rownames(sst_vaskess)
 sst_vaskess$date <- gsub(x = sst_vaskess$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
@@ -95,7 +90,6 @@ for (i in files) {
 
 sst <- do.call(rbind, sstlist)
 sst_southlagoon <- data.frame(sst)
-# colnames(sst_southlagoon) <- c("id","sst")
 
 sst_southlagoon$date <- rownames(sst_southlagoon)
 sst_southlagoon$date <- gsub(x = sst_southlagoon$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
@@ -120,7 +114,6 @@ for (i in files) {
 
 sst <- do.call(rbind, sstlist)
 sst_BOW <- data.frame(sst)
-# colnames(sst_BOW) <- c("id","sst")
 
 sst_BOW$date <- rownames(sst_BOW)
 sst_BOW$date <- gsub(x = sst_BOW$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
@@ -145,12 +138,36 @@ for (i in files) {
 
 sst <- do.call(rbind, sstlist)
 sst_northlagoon <- data.frame(sst)
-# colnames(sst_northlagoon) <- c("id","sst")
 
 sst_northlagoon$date <- rownames(sst_northlagoon)
 sst_northlagoon$date <- gsub(x = sst_northlagoon$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
 sst_northlagoon$date <- gsub(x = sst_northlagoon$date,pattern=".nc",replacement = "")
 sst_northlagoon$date <- as.POSIXct(sst_northlagoon$date,format="%Y%m%d")
+
+# Extract data for Lagoonface (-157.50, 2.00) 
+LonIdx <- 450 # lagoonface -157.50
+LatIdx <- 1760 # lagoonface 2.00
+
+sstlist <- list()
+for (i in files) {
+  # Open the netcdf file
+  nc <- nc_open(i)
+  sstlist[[i]] <- ncvar_get( nc, "analysed_sst")[LonIdx, LatIdx]
+  # Close the netcdf file --!!IMPORTANT!! otherwise you might corrupt your netcfd file
+  nc_close(nc)
+  print(i)
+  Sys.sleep(0.01)
+  flush.console()
+}
+
+sst <- do.call(rbind, sstlist)
+sst_lagoonface <- data.frame(sst)
+
+sst_lagoonface$date <- rownames(sst_lagoonface)
+sst_lagoonface$date <- gsub(x = sst_lagoonface$date,pattern="data/NOAA_CoralTemp/coraltemp_v1.0_",replacement = "")
+sst_lagoonface$date <- gsub(x = sst_lagoonface$date,pattern=".nc",replacement = "")
+sst_lagoonface$date <- as.POSIXct(sst_lagoonface$date,format="%Y%m%d")
+
 
 #########################
 # Merge regions together into one object
@@ -161,8 +178,9 @@ sst_region <- merge(sst_region, sst_vaskess, by="date")
 colnames(sst_region)[5] <- "sst_vaskess"
 sst_region <- merge(sst_region, sst_northshore, by="date")
 colnames(sst_region)[6] <- "sst_northshore"
-
+sst_region <- merge(sst_region, sst_lagoonface, by="date")
+colnames(sst_region)[7] <- "sst_lagoonface"
 
 save(list = c("sst_region","sst_northlagoon","sst_BOW","sst_southlagoon",
-              "sst_vaskess","sst_northshore"), 
+              "sst_vaskess","sst_northshore","sst_lagoonface"), 
      file="data/NOAA_CoralTemp_2011_2018.RData")
