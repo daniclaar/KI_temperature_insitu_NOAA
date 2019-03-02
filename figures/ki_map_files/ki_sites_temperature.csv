@@ -1,0 +1,15 @@
+f.pressure,site,region,lat,lon,site.simple,depth_ft,depth_m
+Low,3,Northshore,2.0519,-157.45602,L1,31,9.4488
+Very low,5,Vaskess,1.84,-157.481,VL3,31,9.4488
+Medium,8,Southlagoon,1.886,-157.552,M1,26,7.9248
+Low,9,Lagoonface,1.92581,-157.50996,L3,31,9.4488
+Very low,15,Bayofwrecks,1.82843,-157.32182,VL1,36,10.9728
+Very low,19,Bayofwrecks,1.80255,-157.27339,VL2,31,9.4488
+High,25,Northshore,2.05002,-157.48611,H1,33,10.0584
+Very high,27,Northlagoon,2.00973,-157.48941,VH2,33,10.0584
+Very high,30,Northlagoon,2.02572,-157.498,VH1,41,12.4968
+Very high,32,Lagoonface,1.984,-157.482,VH3,33,10.0584
+Medium,33,Lagoonface,1.93884,-157.49638,M5,NA,NA
+Medium,34,Southlagoon,1.90992,-157.53456,M3,31,9.4488
+Medium,35,Southlagoon,1.89417,-157.54283,M2,27,8.2296
+High,40,Lagoonface,1.96364,-157.48775,H2,36,10.9728
