@@ -41,24 +41,28 @@ sst_insitu_region <- cbind(sst_region[c(1:2192),],
                            "insitu_northlagoon" = northlagoon_1d$temperature_1d,
                            "insitu_southlagoon" = southlagoon_1d$temperature_1d,
                            "insitu_vaskess" = vaskesbay_1d$temperature_1d,
-                           "insitu_northshore" = northshore_1d$temperature_1d)
+                           "insitu_northshore" = northshore_1d$temperature_1d,
+                           "insitu_lagoonface" = lagoonface_1d$temperature_1d)
+
+sst_insitu_region <- sst_insitu_region[,c(1,5,4,7,3,6,2,11,10,13,9,12,8)]
 
 # Choose what to compare (all in situ and all satellite SST)
-graphs <- sst_insitu_region[,c(2:11)]
+graphs <- sst_insitu_region[,c(2:13)]
 # Run correlationTable
 corr = correlationTable(graphs)
 
-# colnames(corr) <- names(sst_insitu_region[2:11])
-# rownames(corr) <- names(sst_insitu_region[2:11])
-
-colnames(corr) <- c("Bay of Wrecks (S)", "North Lagoon (S)", "South Lagoon (S)",
-                    "Vaskess Bay (S)", "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "Vaskess Bay (I)","North Shore (I)")
-rownames(corr) <- c("Bay of Wrecks (S)", "North Lagoon (S)", "South Lagoon (S)",
-                    "Vaskess Bay (S)", "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "Vaskess Bay (I)","North Shore (I)")
+colnames(corr) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                    "Lagoon Face (S)","North Lagoon (S)",
+                    "North Shore (S)","Bay of Wrecks (S)", 
+                    "Vaskess Bay (I)", "South Lagoon (I)",
+                    "Lagoon Face (I)","North Lagoon (I)",
+                    "North Shore (I)","Bay of Wrecks (I)")
+rownames(corr) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                    "Lagoon Face (S)","North Lagoon (S)",
+                    "North Shore (S)","Bay of Wrecks (S)", 
+                    "Vaskess Bay (I)", "South Lagoon (I)",
+                    "Lagoon Face (I)","North Lagoon (I)",
+                    "North Shore (I)","Bay of Wrecks (I)")
 
 # Removed - insufficient overlap between these two sites - only 62 days
 vaskess_northshore_overlap <- sst_insitu_region[which(sst_insitu_region$insitu_northshore!="NaN" & sst_insitu_region$insitu_vaskess!="NaN"),]
@@ -66,12 +70,22 @@ vaskess_northshore_overlap <- sst_insitu_region[which(sst_insitu_region$insitu_n
 plot(vaskess_northshore_overlap$date,vaskess_northshore_overlap$insitu_northshore)
 nrow(vaskess_northshore_overlap)
 # Use simulated p-value matrix: can be used to cross out certain values in the correlation matrix
-p <- matrix(0.05,10,10)
-p[9,10] <- 1
-p[10,9] <- 1
+p <- matrix(0.05,12,12)
+p[7,11] <- 1
+p[11,7] <- 1
 
 # Create pdf of correlation plot
 pdf(file = "figures/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
+corrplot.mixed(corr, upper = "circle",  
+               lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               number.cex = 0.85,tl.pos = "lt",
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
+               upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               tl.col="black",tl.srt=45,outline="darkgray",
+               p.mat=p,sig.level=0.05,pch.col="darkgray",pch.cex=3)
+dev.off()
+
+jpeg(filename = "figures/corr_plot.jpg",width=8,height=7,units="in",res=300)
 corrplot.mixed(corr, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -85,22 +99,24 @@ dev.off()
 # Use region of overlap August 27 2011 to July 30 2013
 sst_insitu_region_s1 <- sst_insitu_region[c(239:942),]
 # Choose what to compare (all in situ and all satellite SST)
-graphs2 <- sst_insitu_region_s1[,c(2:9,11)]
+graphs2 <- sst_insitu_region_s1[,c(2:7,9,11:13)]
 # Run correlationTable
 corr2 = correlationTable(graphs2)
 
-colnames(corr2) <- c("Bay of Wrecks (S)", "North Lagoon (S)", 
-                     "South Lagoon (S)", "Vaskess Bay (S)", 
-                     "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "North Shore (I)")
-rownames(corr2) <- c("Bay of Wrecks (S)", "North Lagoon (S)", 
-                     "South Lagoon (S)", "Vaskess Bay (S)",
-                     "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "North Shore (I)")
+colnames(corr2) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                    "Lagoon Face (S)","North Lagoon (S)",
+                    "North Shore (S)","Bay of Wrecks (S)", 
+                    "South Lagoon (I)",
+                    "North Lagoon (I)",
+                    "North Shore (I)","Bay of Wrecks (I)")
+rownames(corr2) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                    "Lagoon Face (S)","North Lagoon (S)",
+                    "North Shore (S)","Bay of Wrecks (S)", 
+                    "South Lagoon (I)",
+                    "North Lagoon (I)",
+                    "North Shore (I)","Bay of Wrecks (I)")
 
-pdf(file = "figures/corr_plot_2011to2013_noVaskessI.pdf",width=8,height=7,useDingbats = FALSE)
+pdf(file = "figures/corr_plot_2011to2013_noVaskessInoLagoonFaceI.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr2, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -110,26 +126,49 @@ corrplot.mixed(corr2, upper = "circle",
                pch.col="darkgray",pch.cex=3)
 dev.off()
 
+jpeg(filename = "figures/corr_plot_2011to2013_noVaskessInoLagoonFaceI.jpg",width=8,height=7,units="in",res=300)
+corrplot.mixed(corr2, upper = "circle",  
+               lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               number.cex = 0.85,tl.pos = "lt",
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
+               upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               tl.col="black",tl.srt=45,outline="darkgray",
+               pch.col="darkgray",pch.cex=3)
+dev.off()
+
+
 #################################
 # Use region of overlap November 09 2015 to November 09 2016
 sst_insitu_region_s2 <- sst_insitu_region[c(1774:2140),]
 # Choose what to compare (all in situ and all satellite SST)
-graphs3 <- sst_insitu_region_s2[,c(2:10)]
+graphs3 <- sst_insitu_region_s2[,c(2:11,13)]
 # Run correlationTable
 corr3 = correlationTable(graphs3)
 
-colnames(corr3) <- c("Bay of Wrecks (S)", "North Lagoon (S)", 
-                     "South Lagoon (S)","Vaskess Bay (S)", 
-                     "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "Vaskess Bay (I)")
-rownames(corr3) <- c("Bay of Wrecks (S)", "North Lagoon (S)", 
-                     "South Lagoon (S)", "Vaskess Bay (S)", 
-                     "North Shore (S)","Bay of Wrecks (I)", 
-                    "North Lagoon (I)", "South Lagoon (I)", 
-                    "Vaskess Bay (I)")
+colnames(corr3) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                     "Lagoon Face (S)","North Lagoon (S)",
+                     "North Shore (S)","Bay of Wrecks (S)", 
+                     "Vaskess Bay (I)","South Lagoon (I)",
+                     "North Lagoon (I)",
+                     "North Shore (I)","Bay of Wrecks (I)")
+rownames(corr3) <- c("Vaskess Bay (S)", "South Lagoon (S)",
+                     "Lagoon Face (S)","North Lagoon (S)",
+                     "North Shore (S)","Bay of Wrecks (S)", 
+                     "Vaskess Bay (I)","South Lagoon (I)",
+                     "North Lagoon (I)",
+                     "North Shore (I)","Bay of Wrecks (I)")
 
 pdf(file = "figures/corr_plot_2015to2016_noNorthShoreI.pdf",width=8,height=7,useDingbats = FALSE)
+corrplot.mixed(corr3, upper = "circle",  
+               lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               number.cex = 0.85,tl.pos = "lt",
+               number.digits=3, cl.lim = c(0.75,1),is.corr = FALSE,
+               upper.col = colorRampPalette(c("blue","yellow", "red"))(20),
+               tl.col="black",tl.srt=45,outline="darkgray",
+               pch.col="darkgray",pch.cex=3)
+dev.off()
+
+jpeg(filename = "figures/corr_plot_2015to2016_noNorthShoreI.jpg",width=8,height=7,units="in",res=300)
 corrplot.mixed(corr3, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
