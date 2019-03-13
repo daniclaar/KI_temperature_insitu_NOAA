@@ -3,10 +3,10 @@ rm(list=ls())
 
 # Load necessary data
 load("data/NOAA_CoralTemp_2011_2018.RData")
-load("data/KI_SB_temp_1d.RData")
+load("data/KI_SB_temp_wKim_1d.RData")
 
 # Prep Bay of Wrecks in situ/satellite data for merge
-BOW_I <- bayofwrecks_1d
+BOW_I <- bayofwrecks_1d_wKim
 colnames(BOW_I) <- c("date","insitu_temp")
 BOW_S <- sst_BOW[,c(2,1)]
 colnames(BOW_S) <- c("date","sat_temp")
@@ -18,7 +18,7 @@ BOW$diff <- BOW$sat_temp - BOW$insitu_temp
 BOW_meandiff <- mean(BOW$diff,na.rm = TRUE)
 
 # Prep North shore in situ/satellite data for merge
-NS_I <- northshore_1d
+NS_I <- northshore_1d_wKim
 colnames(NS_I) <- c("date","insitu_temp")
 NS_S <- sst_northshore[,c(2,1)]
 colnames(NS_S) <- c("date","sat_temp")
@@ -28,7 +28,7 @@ NS$diff <- NS$sat_temp - NS$insitu_temp
 NS_meandiff <- mean(NS$diff,na.rm = TRUE)
 
 # Prep North lagoon in situ/satellite data for merge
-NL_I <- northlagoon_1d
+NL_I <- northlagoon_1d_wKim
 colnames(NL_I) <- c("date","insitu_temp")
 NL_S <- sst_northlagoon[,c(2,1)]
 colnames(NL_S) <- c("date","sat_temp")
@@ -38,7 +38,7 @@ NL$diff <- NL$sat_temp - NL$insitu_temp
 NL_meandiff <- mean(NL$diff,na.rm = TRUE)
 
 # Prep South lagoon in situ/satellite data for merge
-SL_I <- southlagoon_1d
+SL_I <- southlagoon_1d_wKim
 colnames(SL_I) <- c("date","insitu_temp")
 SL_S <- sst_southlagoon[,c(2,1)]
 colnames(SL_S) <- c("date","sat_temp")
@@ -48,7 +48,7 @@ SL$diff <- SL$sat_temp - SL$insitu_temp
 SL_meandiff <- mean(SL$diff,na.rm = TRUE)
 
 # Prep Vaskess Bay in situ/satellite data for merge
-VB_I <- vaskesbay_1d
+VB_I <- vaskesbay_1d_wKim
 colnames(VB_I) <- c("date","insitu_temp")
 VB_S <- sst_vaskess[,c(2,1)]
 colnames(VB_S) <- c("date","sat_temp")
@@ -58,7 +58,7 @@ VB$diff <- VB$sat_temp - VB$insitu_temp
 VB_meandiff <- mean(VB$diff,na.rm = TRUE)
 
 # Prep Lagoon face in situ/satellite data for merge
-LF_I <- lagoonface_1d
+LF_I <- lagoonface_1d_wKim
 colnames(LF_I) <- c("date","insitu_temp")
 LF_S <- sst_lagoonface[,c(2,1)]
 colnames(LF_S) <- c("date","sat_temp")
@@ -77,17 +77,17 @@ region_meandiff <- data.frame("Vaskess Bay" = VB_meandiff,
 
 # Calculate variances for each region
 VB_var_satellite <- var(sst_vaskess$sst,na.rm = TRUE)
-VB_var_insitu <- var(vaskesbay_1d$temperature_1d,na.rm=TRUE)
+VB_var_insitu <- var(vaskesbay_1d_wKim$temperature_1d,na.rm=TRUE)
 SL_var_satellite <- var(sst_southlagoon$sst,na.rm = TRUE)
-SL_var_insitu <- var(southlagoon_1d$temperature_1d,na.rm = TRUE)
+SL_var_insitu <- var(southlagoon_1d_wKim$temperature_1d,na.rm = TRUE)
 LF_var_satellite <- var(sst_lagoonface$sst,na.rm = TRUE)
-LF_var_insitu <- var(lagoonface_1d$temperature_1d,na.rm=TRUE)
+LF_var_insitu <- var(lagoonface_1d_wKim$temperature_1d,na.rm=TRUE)
 NL_var_satellite <- var(sst_northlagoon$sst,na.rm = TRUE)
-NL_var_insitu <- var(northlagoon_1d$temperature_1d,na.rm=TRUE)
+NL_var_insitu <- var(northlagoon_1d_wKim$temperature_1d,na.rm=TRUE)
 NS_var_satellite <- var(sst_northshore$sst,na.rm = TRUE)
-NS_var_insitu <- var(northlagoon_1d$temperature_1d,na.rm=TRUE)
+NS_var_insitu <- var(northlagoon_1d_wKim$temperature_1d,na.rm=TRUE)
 BOW_var_satellite <- var(sst_BOW$sst,na.rm = TRUE)
-BOW_var_insitu <- var(bayofwrecks_1d$temperature_1d,na.rm=TRUE)
+BOW_var_insitu <- var(bayofwrecks_1d_wKim$temperature_1d,na.rm=TRUE)
 
 # Make data frames with variances
 region_var_I <- data.frame("Vaskess Bay" = VB_var_insitu, 
@@ -110,11 +110,11 @@ region_var <- t(region_var_comb)
 # November 09 2015 to November 09 2016
 
 # Subset temperature data
-VB_insitu_sub <- vaskesbay_1d[c(1774:2140),]
-SL_insitu_sub <- southlagoon_1d[c(1774:2140),]
-LF_insitu_sub <- lagoonface_1d[c(1774:2140),]
-NL_insitu_sub <- northlagoon_1d[c(1774:2140),]
-BOW_insitu_sub <- bayofwrecks_1d[c(1774:2140),]
+VB_insitu_sub <- vaskesbay_1d_wKim[c(1774:2140),]
+SL_insitu_sub <- southlagoon_1d_wKim[c(1774:2140),]
+LF_insitu_sub <- lagoonface_1d_wKim[c(1774:2140),]
+NL_insitu_sub <- northlagoon_1d_wKim[c(1774:2140),]
+BOW_insitu_sub <- bayofwrecks_1d_wKim[c(1774:2140),]
 VB_satellite_sub <- sst_vaskess[c(1774:2140),]
 SL_satellite_sub <- sst_southlagoon[c(1774:2140),]
 LF_satellite_sub <- sst_lagoonface[c(1774:2140),]
