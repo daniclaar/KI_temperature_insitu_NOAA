@@ -335,13 +335,13 @@ group_sites_by_region <- function(region, region_name){
 }
 
 # Create dataframe for each region that includes all interpolated objects for that site
-southlagoon_night <- c("site8_1hr_night","site34_1hr_night","site35_1hr_night")
-northlagoon_night <- c("site27_1hr_night","site30_1hr_night")
-lagoonface_night <- c("site9_1hr_night","site32_1hr_night","site33_1hr_night","site40_1hr_night","K_33_1hr_night")
-northshore_night <- c("site25_1hr_night","site3_1hr_night","K_22_1hr_night")
-bayofwrecks_night <- c("site15_1hr_night","site19_1hr_night","BOW_K_1hr_night")
-vaskesbay_night <- c("site5_1hr_night","site_5_1hr_night","CTD_K_1hr_night")
-allsites_night <- c("site8_1hr_night","site34_1hr_night","site35_1hr_night","site27_1hr_night","site30_1hr_night","site9_1hr_night","site32_1hr_night","site33_1hr_night","site40_1hr_night","site25_1hr_night","site3_1hr_night","site15_1hr_night","site19_1hr_night","site5_1hr_night","K_33_1hr_night","K_22_1hr_night","BOW_K_1hr_night","site_5_1hr_night","CTD_K_1hr_night")
+southlagoon_night <- c("site8_night_1d","site34_night_1d","site35_night_1d")
+northlagoon_night <- c("site27_night_1d","site30_night_1d")
+lagoonface_night <- c("site9_night_1d","site32_night_1d","site33_night_1d","site40_night_1d","K_33_night_1d")
+northshore_night <- c("site25_night_1d","site3_night_1d","K_22_night_1d")
+bayofwrecks_night <- c("site15_night_1d","site19_night_1d","BOW_K_night_1d")
+vaskesbay_night <- c("site5_night_1d","site_5_night_1d","CTD_K_night_1d")
+allsites_night <- c("site8_night_1d","site34_night_1d","site35_night_1d","site27_night_1d","site30_night_1d","site9_night_1d","site32_night_1d","site33_night_1d","site40_night_1d","site25_night_1d","site3_night_1d","site15_night_1d","site19_night_1d","site5_night_1d","K_33_night_1d","K_22_night_1d","BOW_K_night_1d","site_5_night_1d","CTD_K_night_1d")
 
 group_sites_by_region(region=southlagoon_night,region_name="southlagoon_night_wKim")
 group_sites_by_region(region=northlagoon_night,region_name="northlagoon_night_wKim")
