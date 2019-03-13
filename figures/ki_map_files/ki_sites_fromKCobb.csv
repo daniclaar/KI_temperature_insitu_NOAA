@@ -1,0 +1,6 @@
+f.pressure,site,region,lat,lon,site.simple,depth_ft,depth_m
+Medium,22_K,Northshore,1.9996,-157.37564,M9,NA,NA
+Very high,27_K,Northlagoon,2.00973,-157.48941,VH2,33,10.0584
+Medium,33_K,Lagoonface,1.939,-157.496,M5,NA,NA
+Very low,BOW_K,Bayofwrecks,1.92995,-157.333817,NA,28,8.5344
+Low,CTD_K,Vaskessbay,1.849733,-157.49205,near_L7,29,8.8392
