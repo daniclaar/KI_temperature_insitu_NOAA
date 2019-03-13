@@ -71,20 +71,6 @@ vaskesbay_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(vaskesbay_1hr)
 
-# day.hour <- seq(1, length = length(xi2), by = 1/24)
-
-# vaskessbay_wKim_alltime <- aggregate(zoo(vaskesbay_1hr[, 2], day.hour), floor, mean)
-# vaskessbay_wKim_1d<-cbind.data.frame(xi3,vaskessbay_wKim_alltime)
-# southlagoon_wKim_alltime <- aggregate(x=zoo(vaskesbay_1hr[, 2], day.hour), by=floor, FUN=mean,na.rm=TRUE,na.action=na.pass)
-# southlagoon_wKim_1d<-cbind.data.frame(xi3,southlagoon_wKim_alltime)
-# lagoonface_wKim_alltime <- aggregate(zoo(vaskesbay_1hr[, 2], day.hour), floor, mean)
-# lagoonface_wKim_1d<-cbind.data.frame(xi3,lagoonface_wKim_alltime)
-# northlagoon_wKim_alltime <- aggregate(zoo(vaskesbay_1hr[, 2], day.hour), floor, mean)
-# northlagoon_wKim_1d<-cbind.data.frame(xi3,northlagoon_wKim_alltime)
-# northshore_wKim_alltime <- aggregate(zoo(vaskesbay_1hr[, 2], day.hour), floor, mean)
-# northshore_wKim_1d<-cbind.data.frame(xi3,northshore_wKim_alltime)
-# bayofwrecks_wKim_alltime <- aggregate(zoo(vaskesbay_1hr[, 2], day.hour), floor, mean)
-# bayofwrecks_wKim_1d<-cbind.data.frame(xi3,bayofwrecks_wKim_alltime)
 
 #####
 ## Now calculate the mean for each hour
@@ -122,4 +108,255 @@ dim(tempmatrix) = c(24,length(northshore_1hr$temperature_1hr)/24)
 temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
 northshore_1d_wKim<-cbind.data.frame(xi3,temperature_1d)
 
-save(vaskesbay_1d_wKim,southlagoon_1d_wKim,lagoonface_1d_wKim,northlagoon_1d_wKim,northshore_1d_wKim,bayofwrecks_1d_wKim,file = "data/KI_SB_temp_wKim_1d.RData")
+######################
+# Now use nightime only temperatures
+
+sunRise <- format("05:00:00",format="%H:%M:%S")
+sunSet <- format("20:00:00",format="%H:%M:%S")
+
+site8_1hr_night <- site8_1hr
+site8_1hr_night$time <- format(site8_1hr$xi2, format="%H:%M:%S")
+site8_1hr_night$dayNight <- ifelse(site8_1hr_night$time > sunRise & site8_1hr_night$time < sunSet, 'day', 'night')
+site8_1hr_night$temperature_1hr[site8_1hr_night$dayNight=="day"] <- NA
+site8_1hr_night <- site8_1hr_night[c(1,2)]
+
+site3_1hr_night <- site3_1hr
+site3_1hr_night$time <- format(site3_1hr$xi2, format="%H:%M:%S")
+site3_1hr_night$dayNight <- ifelse(site3_1hr_night$time > sunRise & site3_1hr_night$time < sunSet, 'day', 'night')
+site3_1hr_night$temperature_1hr[site3_1hr_night$dayNight=="day"] <- NA
+site3_1hr_night <- site3_1hr_night[c(1,2)]
+
+site5_1hr_night <- site5_1hr
+site5_1hr_night$time <- format(site5_1hr$xi2, format="%H:%M:%S")
+site5_1hr_night$dayNight <- ifelse(site5_1hr_night$time > sunRise & site5_1hr_night$time < sunSet, 'day', 'night')
+site5_1hr_night$temperature_1hr[site5_1hr_night$dayNight=="day"] <- NA
+site5_1hr_night <- site5_1hr_night[c(1,2)]
+
+site9_1hr_night <- site9_1hr
+site9_1hr_night$time <- format(site9_1hr$xi2, format="%H:%M:%S")
+site9_1hr_night$dayNight <- ifelse(site9_1hr_night$time > sunRise & site9_1hr_night$time < sunSet, 'day', 'night')
+site9_1hr_night$temperature_1hr[site9_1hr_night$dayNight=="day"] <- NA
+site9_1hr_night <- site9_1hr_night[c(1,2)]
+
+site15_1hr_night <- site15_1hr
+site15_1hr_night$time <- format(site15_1hr$xi2, format="%H:%M:%S")
+site15_1hr_night$dayNight <- ifelse(site15_1hr_night$time > sunRise & site15_1hr_night$time < sunSet, 'day', 'night')
+site15_1hr_night$temperature_1hr[site15_1hr_night$dayNight=="day"] <- NA
+site15_1hr_night <- site15_1hr_night[c(1,2)]
+
+site19_1hr_night <- site19_1hr
+site19_1hr_night$time <- format(site19_1hr$xi2, format="%H:%M:%S")
+site19_1hr_night$dayNight <- ifelse(site19_1hr_night$time > sunRise & site19_1hr_night$time < sunSet, 'day', 'night')
+site19_1hr_night$temperature_1hr[site19_1hr_night$dayNight=="day"] <- NA
+site19_1hr_night <- site19_1hr_night[c(1,2)]
+
+site25_1hr_night <- site25_1hr
+site25_1hr_night$time <- format(site25_1hr$xi2, format="%H:%M:%S")
+site25_1hr_night$dayNight <- ifelse(site25_1hr_night$time > sunRise & site25_1hr_night$time < sunSet, 'day', 'night')
+site25_1hr_night$temperature_1hr[site25_1hr_night$dayNight=="day"] <- NA
+site25_1hr_night <- site25_1hr_night[c(1,2)]
+
+site27_1hr_night <- site27_1hr
+site27_1hr_night$time <- format(site27_1hr$xi2, format="%H:%M:%S")
+site27_1hr_night$dayNight <- ifelse(site27_1hr_night$time > sunRise & site27_1hr_night$time < sunSet, 'day', 'night')
+site27_1hr_night$temperature_1hr[site27_1hr_night$dayNight=="day"] <- NA
+site27_1hr_night <- site27_1hr_night[c(1,2)]
+
+site30_1hr_night <- site30_1hr
+site30_1hr_night$time <- format(site30_1hr$xi2, format="%H:%M:%S")
+site30_1hr_night$dayNight <- ifelse(site30_1hr_night$time > sunRise & site30_1hr_night$time < sunSet, 'day', 'night')
+site30_1hr_night$temperature_1hr[site30_1hr_night$dayNight=="day"] <- NA
+site30_1hr_night <- site30_1hr_night[c(1,2)]
+
+site32_1hr_night <- site32_1hr
+site32_1hr_night$time <- format(site32_1hr$xi2, format="%H:%M:%S")
+site32_1hr_night$dayNight <- ifelse(site32_1hr_night$time > sunRise & site32_1hr_night$time < sunSet, 'day', 'night')
+site32_1hr_night$temperature_1hr[site32_1hr_night$dayNight=="day"] <- NA
+site32_1hr_night <- site32_1hr_night[c(1,2)]
+
+site33_1hr_night <- site33_1hr
+site33_1hr_night$time <- format(site33_1hr$xi2, format="%H:%M:%S")
+site33_1hr_night$dayNight <- ifelse(site33_1hr_night$time > sunRise & site33_1hr_night$time < sunSet, 'day', 'night')
+site33_1hr_night$temperature_1hr[site33_1hr_night$dayNight=="day"] <- NA
+site33_1hr_night <- site33_1hr_night[c(1,2)]
+
+site34_1hr_night <- site34_1hr
+site34_1hr_night$time <- format(site34_1hr$xi2, format="%H:%M:%S")
+site34_1hr_night$dayNight <- ifelse(site34_1hr_night$time > sunRise & site34_1hr_night$time < sunSet, 'day', 'night')
+site34_1hr_night$temperature_1hr[site34_1hr_night$dayNight=="day"] <- NA
+site34_1hr_night <- site34_1hr_night[c(1,2)]
+
+site35_1hr_night <- site35_1hr
+site35_1hr_night$time <- format(site35_1hr$xi2, format="%H:%M:%S")
+site35_1hr_night$dayNight <- ifelse(site35_1hr_night$time > sunRise & site35_1hr_night$time < sunSet, 'day', 'night')
+site35_1hr_night$temperature_1hr[site35_1hr_night$dayNight=="day"] <- NA
+site35_1hr_night <- site35_1hr_night[c(1,2)]
+
+site40_1hr_night <- site40_1hr
+site40_1hr_night$time <- format(site40_1hr$xi2, format="%H:%M:%S")
+site40_1hr_night$dayNight <- ifelse(site40_1hr_night$time > sunRise & site40_1hr_night$time < sunSet, 'day', 'night')
+site40_1hr_night$temperature_1hr[site40_1hr_night$dayNight=="day"] <- NA
+site40_1hr_night <- site40_1hr_night[c(1,2)]
+
+K_33_1hr_night <- K_33_1hr
+K_33_1hr_night$time <- format(K_33_1hr$xi2, format="%H:%M:%S")
+K_33_1hr_night$dayNight <- ifelse(K_33_1hr_night$time > sunRise & K_33_1hr_night$time < sunSet, 'day', 'night')
+K_33_1hr_night$temperature_1hr[K_33_1hr_night$dayNight=="day"] <- NA
+K_33_1hr_night <- K_33_1hr_night[c(1,2)]
+
+K_22_1hr_night <- K_22_1hr
+K_22_1hr_night$time <- format(K_22_1hr$xi2, format="%H:%M:%S")
+K_22_1hr_night$dayNight <- ifelse(K_22_1hr_night$time > sunRise & K_22_1hr_night$time < sunSet, 'day', 'night')
+K_22_1hr_night$temperature_1hr[K_22_1hr_night$dayNight=="day"] <- NA
+K_22_1hr_night <- K_22_1hr_night[c(1,2)]
+
+BOW_K_1hr_night <- BOW_K_1hr
+BOW_K_1hr_night$time <- format(BOW_K_1hr$xi2, format="%H:%M:%S")
+BOW_K_1hr_night$dayNight <- ifelse(BOW_K_1hr_night$time > sunRise & BOW_K_1hr_night$time < sunSet, 'day', 'night')
+BOW_K_1hr_night$temperature_1hr[BOW_K_1hr_night$dayNight=="day"] <- NA
+BOW_K_1hr_night <- BOW_K_1hr_night[c(1,2)]
+
+site_5_1hr_night <- site_5_1hr
+site_5_1hr_night$time <- format(site_5_1hr$xi2, format="%H:%M:%S")
+site_5_1hr_night$dayNight <- ifelse(site_5_1hr_night$time > sunRise & site_5_1hr_night$time < sunSet, 'day', 'night')
+site_5_1hr_night$temperature_1hr[site_5_1hr_night$dayNight=="day"] <- NA
+site_5_1hr_night <- site_5_1hr_night[c(1,2)]
+
+CTD_K_1hr_night <- CTD_K_1hr
+CTD_K_1hr_night$time <- format(CTD_K_1hr$xi2, format="%H:%M:%S")
+CTD_K_1hr_night$dayNight <- ifelse(CTD_K_1hr_night$time > sunRise & CTD_K_1hr_night$time < sunSet, 'day', 'night')
+CTD_K_1hr_night$temperature_1hr[CTD_K_1hr_night$dayNight=="day"] <- NA
+CTD_K_1hr_night <- CTD_K_1hr_night[c(1,2)]
+
+tempmatrix <- BOW_K_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(BOW_K_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+BOW_K_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- CTD_K_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(CTD_K_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+CTD_K_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- K_22_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(K_22_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+K_22_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- K_33_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(K_33_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+K_33_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site_5_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site_5_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site_5_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site15_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site15_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site15_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site19_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site19_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site19_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site25_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site25_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site25_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site27_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site27_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site27_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site3_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site3_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site3_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site30_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site30_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site30_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site32_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site32_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site32_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site33_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site33_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site33_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site34_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site34_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site34_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site35_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site35_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site35_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site40_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site40_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site40_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site5_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site5_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site5_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site8_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site8_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site8_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+tempmatrix <- site9_1hr_night$temperature_1hr
+dim(tempmatrix) = c(24,length(site9_1hr_night$temperature_1hr)/24)
+temperature_1d <- colMeans(tempmatrix,na.rm=TRUE)
+site9_night_1d<-cbind.data.frame(xi3,temperature_1d)
+
+
+group_sites_by_region <- function(region, region_name){
+  indivlogger <- paste(region,collapse=",")
+  evalstr <- paste("temperature_1d <- cbind(",indivlogger,")")
+  eval(parse(text=evalstr))
+  temperature_1d <- temperature_1d[,seq(0,ncol(temperature_1d),2)]
+  ifelse(ncol(temperature_1d)>1,temperature_1d <- rowMeans(temperature_1d,na.rm=TRUE),temperature_1d)
+  evalstr2 <- paste(region_name,"_1d <<- cbind.data.frame(xi3,temperature_1d)",sep="")
+  eval(parse(text=evalstr2))
+}
+
+# Create dataframe for each region that includes all interpolated objects for that site
+southlagoon_night <- c("site8_1hr_night","site34_1hr_night","site35_1hr_night")
+northlagoon_night <- c("site27_1hr_night","site30_1hr_night")
+lagoonface_night <- c("site9_1hr_night","site32_1hr_night","site33_1hr_night","site40_1hr_night","K_33_1hr_night")
+northshore_night <- c("site25_1hr_night","site3_1hr_night","K_22_1hr_night")
+bayofwrecks_night <- c("site15_1hr_night","site19_1hr_night","BOW_K_1hr_night")
+vaskesbay_night <- c("site5_1hr_night","site_5_1hr_night","CTD_K_1hr_night")
+allsites_night <- c("site8_1hr_night","site34_1hr_night","site35_1hr_night","site27_1hr_night","site30_1hr_night","site9_1hr_night","site32_1hr_night","site33_1hr_night","site40_1hr_night","site25_1hr_night","site3_1hr_night","site15_1hr_night","site19_1hr_night","site5_1hr_night","K_33_1hr_night","K_22_1hr_night","BOW_K_1hr_night","site_5_1hr_night","CTD_K_1hr_night")
+
+group_sites_by_region(region=southlagoon_night,region_name="southlagoon_night_wKim")
+group_sites_by_region(region=northlagoon_night,region_name="northlagoon_night_wKim")
+group_sites_by_region(region=lagoonface_night,region_name="lagoonface_night_wKim")
+group_sites_by_region(region=northshore_night,region_name="northshore_night_wKim")
+group_sites_by_region(region=bayofwrecks_night,region_name="bayofwrecks_night_wKim")
+group_sites_by_region(region=vaskesbay_night,region_name="vaskesbay_night_wKim")
+group_sites_by_region(region=allsites_night,region_name="KI_allsites_night_wKim")
+
+
+
+save(vaskesbay_1d_wKim,vaskesbay_night_wKim_1d,
+     southlagoon_1d_wKim,southlagoon_night_wKim_1d,
+     lagoonface_1d_wKim,lagoonface_night_wKim_1d,
+     northlagoon_1d_wKim,northlagoon_night_wKim_1d,
+     northshore_1d_wKim,northshore_night_wKim_1d,
+     bayofwrecks_1d_wKim,bayofwrecks_night_wKim_1d,
+     file = "data/KI_SB_temp_wKim_1d.RData")
