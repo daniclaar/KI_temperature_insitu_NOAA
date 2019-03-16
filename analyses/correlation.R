@@ -52,16 +52,16 @@ graphs <- sst_insitu_region[,c(2:13)]
 corr = correlationTable(graphs)
 
 colnames(corr) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                    "Lagoon Face (S)","North Lagoon (S)",
+                    "Mid Lagoon (S)","North Lagoon (S)",
                     "North Shore (S)","Bay of Wrecks (S)", 
                     "Vaskess Bay (I)", "South Lagoon (I)",
-                    "Lagoon Face (I)","North Lagoon (I)",
+                    "Mid Lagoon (I)","North Lagoon (I)",
                     "North Shore (I)","Bay of Wrecks (I)")
 rownames(corr) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                    "Lagoon Face (S)","North Lagoon (S)",
+                    "Mid Lagoon (S)","North Lagoon (S)",
                     "North Shore (S)","Bay of Wrecks (S)", 
                     "Vaskess Bay (I)", "South Lagoon (I)",
-                    "Lagoon Face (I)","North Lagoon (I)",
+                    "Mid Lagoon (I)","North Lagoon (I)",
                     "North Shore (I)","Bay of Wrecks (I)")
 
 # No longer need to remove with including Kim's data
@@ -105,13 +105,13 @@ graphs2 <- sst_insitu_region_s1[,c(2:7,9,11:13)]
 corr2 = correlationTable(graphs2)
 
 colnames(corr2) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                    "Lagoon Face (S)","North Lagoon (S)",
+                    "Mid Lagoon (S)","North Lagoon (S)",
                     "North Shore (S)","Bay of Wrecks (S)", 
                     "South Lagoon (I)",
                     "North Lagoon (I)",
                     "North Shore (I)","Bay of Wrecks (I)")
 rownames(corr2) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                    "Lagoon Face (S)","North Lagoon (S)",
+                    "Mid Lagoon (S)","North Lagoon (S)",
                     "North Shore (S)","Bay of Wrecks (S)", 
                     "South Lagoon (I)",
                     "North Lagoon (I)",
@@ -147,17 +147,17 @@ graphs3 <- sst_insitu_region_s2[,c(2:11,13)]
 corr3 = correlationTable(graphs3)
 
 colnames(corr3) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                     "Lagoon Face (S)","North Lagoon (S)",
+                     "Mid Lagoon (S)","North Lagoon (S)",
                      "North Shore (S)","Bay of Wrecks (S)", 
                      "Vaskess Bay (I)","South Lagoon (I)",
-                     "North Lagoon (I)",
-                     "North Shore (I)","Bay of Wrecks (I)")
+                     "Mid Lagoon (I)","North Lagoon (I)",
+                     "Bay of Wrecks (I)")
 rownames(corr3) <- c("Vaskess Bay (S)", "South Lagoon (S)",
-                     "Lagoon Face (S)","North Lagoon (S)",
+                     "Mid Lagoon (S)","North Lagoon (S)",
                      "North Shore (S)","Bay of Wrecks (S)", 
                      "Vaskess Bay (I)","South Lagoon (I)",
-                     "North Lagoon (I)",
-                     "North Shore (I)","Bay of Wrecks (I)")
+                     "Mid Lagoon (I)","North Lagoon (I)",
+                     "Bay of Wrecks (I)")
 
 pdf(file = "figures/corr_plot_2015to2016_noNorthShoreI.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr3, upper = "circle",  
