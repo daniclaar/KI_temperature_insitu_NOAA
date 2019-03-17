@@ -1,6 +1,10 @@
 # Clear working environment
 rm(list=ls())
 
+#
+library(ggplot2)
+library(gridExtra)
+
 # Load necessary data
 load("data/NOAA_CoralTemp_2011_2018.RData")
 load("data/KI_SB_temp_wKim_1d.RData")
@@ -479,11 +483,12 @@ region.cols<-c("VaskessBay" = "#5F4690","SouthLagoon"="#1D6996",
                "MidLagoon"="#0F8554","NorthLagoon"="#EDAD08",
                "NorthShore"="#E17C05","BayofWrecks"="#CC503E")
 
-noEN_meandiff <- data.frame(t(noEN_meandiff))
-noEN_meandiff$region <- rownames(test)
+# noEN_meandiff <- data.frame(t(noEN_meandiff))
+# noEN_meandiff$region <- rownames(noEN_meandiff)
 
 p <- ggplot(noEN_meandiff)
-p <- p + scale_x_discrete(name="") + scale_y_continuous(name="Mean Difference") +
+p <- p + scale_x_discrete(name="") + 
+  scale_y_continuous(name="Mean Difference",lim=c(-0.3,1)) +
   geom_hline(yintercept = 0,linetype="dashed")+
   theme_classic()+guides(fill=FALSE)+
   geom_violin(aes(x="1_VB",y=VB,fill=region.cols[["VaskessBay"]]))+
@@ -493,6 +498,7 @@ p <- p + scale_x_discrete(name="") + scale_y_continuous(name="Mean Difference") 
   geom_violin(aes(x="5_NS",y=NS,fill=region.cols[["NorthShore"]]))+
   geom_violin(aes(x="6_BOW",y=BOW,fill=region.cols[["BayofWrecks"]]))+
   scale_fill_manual(values = c("#0F8554","#1D6996","#5F4690","#CC503E","#E17C05","#EDAD08"))
+p
 
 BOW_noEN_3 <- BOW_noEN[!is.na(BOW_noEN$diff),]
 BOW_noEN_3_s <- split(BOW_noEN_3, sample(1:round(nrow(BOW_noEN_3)/60), nrow(BOW_noEN_3), replace=T))
@@ -523,10 +529,114 @@ BOW_noEN_3_s_meandiff[22,] <- mean(BOW_noEN_3_s$`22`$diff,na.rm = TRUE)
 BOW_noEN_3_s_meandiff[23,] <- mean(BOW_noEN_3_s$`23`$diff,na.rm = TRUE)
 BOW_noEN_3_s_meandiff[24,] <- mean(BOW_noEN_3_s$`24`$diff,na.rm = TRUE)
 BOW_noEN_3_s_meandiff[25,] <- mean(BOW_noEN_3_s$`25`$diff,na.rm = TRUE)                    
-p2 <- ggplot(BOW_noEN_3_s_meandiff) +
-geom_violin(aes(x="BOW",y=seq.1..25.)) + ylim(-0.3,0.9)
+LF_noEN_3 <- LF_noEN[!is.na(LF_noEN$diff),]
+LF_noEN_3_s <- split(LF_noEN_3, sample(1:round(nrow(LF_noEN_3)/60), nrow(LF_noEN_3), replace=T))
+LF_noEN_3_s$`1`$diff
+LF_noEN_3_s_meandiff <- data.frame(seq(1,25))
+LF_noEN_3_s_meandiff[1,] <- mean(LF_noEN_3_s$`1`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[2,] <- mean(LF_noEN_3_s$`2`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[3,] <- mean(LF_noEN_3_s$`3`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[4,] <- mean(LF_noEN_3_s$`4`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[5,] <- mean(LF_noEN_3_s$`5`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[6,] <- mean(LF_noEN_3_s$`6`$diff,na.rm = TRUE)
+LF_noEN_3_s_meandiff[7,] <- mean(LF_noEN_3_s$`7`$diff,na.rm = TRUE)
 
-p2
-p
+NL_noEN_3 <- NL_noEN[!is.na(NL_noEN$diff),]
+NL_noEN_3_s <- split(NL_noEN_3, sample(1:round(nrow(NL_noEN_3)/60), nrow(NL_noEN_3), replace=T))
+NL_noEN_3_s$`1`$diff
+NL_noEN_3_s_meandiff <- data.frame(seq(1,25))
+NL_noEN_3_s_meandiff[1,] <- mean(NL_noEN_3_s$`1`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[2,] <- mean(NL_noEN_3_s$`2`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[3,] <- mean(NL_noEN_3_s$`3`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[4,] <- mean(NL_noEN_3_s$`4`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[5,] <- mean(NL_noEN_3_s$`5`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[6,] <- mean(NL_noEN_3_s$`6`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[7,] <- mean(NL_noEN_3_s$`7`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[8,] <- mean(NL_noEN_3_s$`8`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[9,] <- mean(NL_noEN_3_s$`9`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[10,] <- mean(NL_noEN_3_s$`10`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[11,] <- mean(NL_noEN_3_s$`11`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[12,] <- mean(NL_noEN_3_s$`12`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[13,] <- mean(NL_noEN_3_s$`13`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[14,] <- mean(NL_noEN_3_s$`14`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[15,] <- mean(NL_noEN_3_s$`15`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[16,] <- mean(NL_noEN_3_s$`16`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[17,] <- mean(NL_noEN_3_s$`17`$diff,na.rm = TRUE)
+NL_noEN_3_s_meandiff[18,] <- mean(NL_noEN_3_s$`18`$diff,na.rm = TRUE)
 
-grid.arrange(p,p2,ncol=2)
+NS_noEN_3 <- NS_noEN[!is.na(NS_noEN$diff),]
+NS_noEN_3_s <- split(NS_noEN_3, sample(1:round(nrow(NS_noEN_3)/60), nrow(NS_noEN_3), replace=T))
+NS_noEN_3_s$`1`$diff
+NS_noEN_3_s_meandiff <- data.frame(seq(1,25))
+NS_noEN_3_s_meandiff[1,] <- mean(NS_noEN_3_s$`1`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[2,] <- mean(NS_noEN_3_s$`2`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[3,] <- mean(NS_noEN_3_s$`3`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[4,] <- mean(NS_noEN_3_s$`4`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[5,] <- mean(NS_noEN_3_s$`5`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[6,] <- mean(NS_noEN_3_s$`6`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[7,] <- mean(NS_noEN_3_s$`7`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[8,] <- mean(NS_noEN_3_s$`8`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[9,] <- mean(NS_noEN_3_s$`9`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[10,] <- mean(NS_noEN_3_s$`10`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[11,] <- mean(NS_noEN_3_s$`11`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[12,] <- mean(NS_noEN_3_s$`12`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[13,] <- mean(NS_noEN_3_s$`13`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[14,] <- mean(NS_noEN_3_s$`14`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[15,] <- mean(NS_noEN_3_s$`15`$diff,na.rm = TRUE)
+NS_noEN_3_s_meandiff[16,] <- mean(NS_noEN_3_s$`16`$diff,na.rm = TRUE)
+
+
+SL_noEN_3 <- SL_noEN[!is.na(SL_noEN$diff),]
+SL_noEN_3_s <- split(SL_noEN_3, sample(1:round(nrow(SL_noEN_3)/60), nrow(SL_noEN_3), replace=T))
+SL_noEN_3_s$`1`$diff
+SL_noEN_3_s_meandiff <- data.frame(seq(1,25))
+SL_noEN_3_s_meandiff[1,] <- mean(SL_noEN_3_s$`1`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[2,] <- mean(SL_noEN_3_s$`2`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[3,] <- mean(SL_noEN_3_s$`3`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[4,] <- mean(SL_noEN_3_s$`4`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[5,] <- mean(SL_noEN_3_s$`5`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[6,] <- mean(SL_noEN_3_s$`6`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[7,] <- mean(SL_noEN_3_s$`7`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[8,] <- mean(SL_noEN_3_s$`8`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[9,] <- mean(SL_noEN_3_s$`9`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[10,] <- mean(SL_noEN_3_s$`10`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[11,] <- mean(SL_noEN_3_s$`11`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[12,] <- mean(SL_noEN_3_s$`12`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[13,] <- mean(SL_noEN_3_s$`13`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[14,] <- mean(SL_noEN_3_s$`14`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[15,] <- mean(SL_noEN_3_s$`15`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[16,] <- mean(SL_noEN_3_s$`16`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[17,] <- mean(SL_noEN_3_s$`17`$diff,na.rm = TRUE)
+SL_noEN_3_s_meandiff[18,] <- mean(SL_noEN_3_s$`18`$diff,na.rm = TRUE)
+
+VB_noEN_3 <- VB_noEN[!is.na(VB_noEN$diff),]
+VB_noEN_3_s <- split(VB_noEN_3, sample(1:round(nrow(VB_noEN_3)/60), nrow(VB_noEN_3), replace=T))
+VB_noEN_3_s$`1`$diff
+VB_noEN_3_s_meandiff <- data.frame(seq(1,25))
+VB_noEN_3_s_meandiff[1,] <- mean(VB_noEN_3_s$`1`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[2,] <- mean(VB_noEN_3_s$`2`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[3,] <- mean(VB_noEN_3_s$`3`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[4,] <- mean(VB_noEN_3_s$`4`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[5,] <- mean(VB_noEN_3_s$`5`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[6,] <- mean(VB_noEN_3_s$`6`$diff,na.rm = TRUE)
+VB_noEN_3_s_meandiff[7,] <- mean(VB_noEN_3_s$`7`$diff,na.rm = TRUE)
+
+
+noEN_3_meandiff <- cbind(BOW_noEN_3_s_meandiff,LF_noEN_3_s_meandiff,NL_noEN_3_s_meandiff,NS_noEN_3_s_meandiff,SL_noEN_3_s_meandiff,VB_noEN_3_s_meandiff)
+colnames(noEN_3_meandiff) <- c("BOW","LF","NL","NS","SL","VB")
+
+p3 <- ggplot(noEN_3_meandiff)
+p3 <- p3 + scale_x_discrete(name="") +
+  scale_y_continuous(name="Mean Difference",lim=c(-0.3,1)) +
+  geom_hline(yintercept = 0,linetype="dashed")+
+  theme_classic()+guides(fill=FALSE)+
+  geom_violin(aes(x="1_VB",y=VB,fill=region.cols[["VaskessBay"]]))+
+  geom_violin(aes(x="2_SL",y=SL,fill=region.cols[["SouthLagoon"]]))+
+  geom_violin(aes(x="3_LF",y=LF,fill=region.cols[["MidLagoon"]]))+
+  geom_violin(aes(x="4_NL",y=NL,fill=region.cols[["NorthLagoon"]]))+
+  geom_violin(aes(x="5_NS",y=NS,fill=region.cols[["NorthShore"]]))+
+  geom_violin(aes(x="6_BOW",y=BOW,fill=region.cols[["BayofWrecks"]]))+
+  scale_fill_manual(values = c("#0F8554","#1D6996","#5F4690","#CC503E","#E17C05","#EDAD08"))
+p3
+
+grid.arrange(p,p3,ncol=2)
