@@ -111,7 +111,7 @@ LF_scatter <- ggplot(data = LF,aes(x=insitu_temp,y=sat_temp,color=insitu_temp))+
   scale_x_continuous(limits = c(24,31.75),expand=c(0,0),name = NULL)+
   scale_y_continuous(limits = c(24,31.75),expand=c(0,0), name = "Satellite Temperature (°C)")+
   scale_color_viridis_c(option="B",direction=-1,guide=FALSE) +
-  annotate("text",x=26,y=30.75, label="Lagoon Face")
+  annotate("text",x=26,y=30.75, label="Mid Lagoon")
 
            
 jpeg(filename = "figures/scatter_plots.jpg",width = 6, height=8, units="in",res=300)
