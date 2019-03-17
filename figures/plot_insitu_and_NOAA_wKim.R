@@ -55,7 +55,7 @@ NS <- plot_temps(northshore_1d_wKim,sst_northshore)+guides(color=FALSE)+
 VB <- plot_temps(vaskesbay_1d_wKim,sst_vaskess)+guides(color=FALSE)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Vaskes Bay")+
+           y=30.5, label="Vaskess Bay")+
   scale_color_manual(name=NULL, values = c("turquoise","gray50"))
 SL <- plot_temps(southlagoon_1d_wKim,sst_southlagoon)+guides(color=FALSE)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
@@ -65,7 +65,7 @@ SL <- plot_temps(southlagoon_1d_wKim,sst_southlagoon)+guides(color=FALSE)+
 LF <- plot_temps(lagoonface_1d_wKim,sst_lagoonface)+guides(color=FALSE)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Lagoon Face")+
+           y=30.5, label="Mid Lagoon")+
   scale_color_manual(name=NULL, values = c("turquoise","gray50"))
 
 
@@ -88,7 +88,7 @@ NS2 <- plot_temps(northshore_1d_wKim,sst_northshore)+
 VB2 <- plot_temps(vaskesbay_1d_wKim,sst_vaskess)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Vaskes Bay")+
+           y=30.5, label="Vaskess Bay")+
   scale_color_manual(name=NULL, values = c(region.cols[["VaskessBay"]],"gray50"))
 SL2 <- plot_temps(southlagoon_1d_wKim,sst_southlagoon)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
@@ -98,7 +98,7 @@ SL2 <- plot_temps(southlagoon_1d_wKim,sst_southlagoon)+
 LF2 <- plot_temps(lagoonface_1d_wKim,sst_lagoonface)+
   annotate("text",x=as.POSIXct("2012/4/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Lagoon Face")+
+           y=30.5, label="Mid Lagoon")+
   scale_color_manual(name=NULL, values = c(region.cols[["MidLagoon"]],"gray50"))
 
 
