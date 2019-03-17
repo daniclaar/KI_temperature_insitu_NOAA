@@ -37,4 +37,4 @@ MMM_VB <- sst_NOAA_clim_full[LonIdx_VB,LatIdx_VB]
 MMM_all <- t(data.frame("Bay of Wrecks" = MMM_BOW, "Mid Lagoon" = MMM_LF,"North Lagoon" = MMM_NL, "North Shore" = MMM_NS,"South Lagoon" = MMM_SL, "Vaskess Bay" = MMM_VB))
 colnames(MMM_all) <- "MMM"
 
-save(MMM_all,file="NOAA_MMM_byregion.RData")
+save(MMM_all,file="data/NOAA_MMM_byregion.RData")
