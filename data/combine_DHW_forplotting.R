@@ -12,3 +12,5 @@ DHW_all <- cbind(DHW_all,southlagoon_DHW_minOffsetnoEN$DHW,northlagoon_DHW_minOf
                  
 
 colnames(DHW_all) <- c("xi4","SL_NOAAMMM","NL_NOAAMMM","LF_NOAAMMM","NS_NOAAMMM","BOW_NOAAMMM","VB_NOAAMMM","SL_NOAAminOffset","NL_NOAAminOffset","LF_NOAAminOffset","NS_NOAAminOffset","BOW_NOAAminOffset","VB_NOAAminOffset","SL_NOAAminOffsetnoEN","NL_NOAAminOffsetnoEN","LF_NOAAminOffsetnoEN","NS_NOAAminOffsetnoEN","BOW_NOAAminOffsetnoEN","VB_NOAAminOffsetnoEN")
+
+save(DHW_all,file="data/DHW_all.RData")
