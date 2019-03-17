@@ -37,13 +37,13 @@ lagoonface_night_wKim_1d <- lagoonface_night_wKim_1d[c(233:nrow(lagoonface_night
 
 
 plot_temps_daynight <- function(day,night){
-  ggplot()+ theme_classic()+theme(legend.position = c(0.08, 0.87))+
+  ggplot()+ theme_classic()+theme(legend.position = c(0.88, 0.2))+
     geom_line(aes(x=xi3,y=temperature_1d, color="Day+Night"),
               data=day)+
     geom_line(aes(x=xi3,y=temperature_1d, color="Night-only"),data=night,alpha=0.5)+
     scale_color_manual(name=NULL, values = c("gray70","black"))+
     scale_x_datetime(name="Date", expand=c(0,0))+
-    scale_y_continuous(name="Temperature (?C)",limits = c(24,31))+
+    scale_y_continuous(name="Temperature (°C)",limits = c(24,31))+
     NULL
 }
 
@@ -106,20 +106,20 @@ lagoonface_night_wKim_1d_sub <- lagoonface_night_wKim_1d[c(1360:1420),]
 
 BOW_sub <- plot_temps_daynight(bayofwrecks_1d_wKim_sub,bayofwrecks_night_wKim_1d_sub)+
   # guides(color=FALSE)+    
-  scale_y_continuous(name="Temperature (?C)",limits = c(28.3,30),expand=c(0,0))+
-  annotate("text",x=as.POSIXct("2015/7/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
+  annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Bay of Wrecks")+
+           y=29.75, label="Bay of Wrecks")+
   scale_color_manual(name=NULL, values = c(region.cols[["BayofWrecks"]],region.cols[["BayofWrecks_night"]]))+    
   scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
                    labels=date_format('%b %Y'))
 
 NL_sub <- plot_temps_daynight(northlagoon_1d_wKim_sub,northlagoon_night_wKim_1d_sub)+
   # guides(color=FALSE)+
-  scale_y_continuous(name="Temperature (?C)",limits = c(28.3,30),expand=c(0,0))+
-  annotate("text",x=as.POSIXct("2015/7/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
+  annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="North Lagoon")+
+           y=29.75, label="North Lagoon")+
   scale_color_manual(name=NULL, values = c(region.cols[["NorthLagoon"]],region.cols[["NorthLagoon_night"]]))+
   scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
                    labels=date_format('%b %Y'))
@@ -127,20 +127,20 @@ NL_sub <- plot_temps_daynight(northlagoon_1d_wKim_sub,northlagoon_night_wKim_1d_
 
 NS_sub <- plot_temps_daynight(northshore_1d_wKim_sub,northshore_night_wKim_1d_sub)+
   # guides(color=FALSE)+
-  scale_y_continuous(name="Temperature (?C)",limits = c(28.3,30),expand=c(0,0))+
-  annotate("text",x=as.POSIXct("2015/7/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
+  annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="North Shore")+
+           y=29.75, label="North Shore")+
   scale_color_manual(name=NULL, values = c(region.cols[["NorthShore"]],region.cols[["NorthShore_night"]]))+
   scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
                    labels=date_format('%b %Y'))
 
 
 VB_sub <- plot_temps_daynight(vaskesbay_1d_wKim_sub,vaskesbay_night_wKim_1d_sub)+
-  annotate("text",x=as.POSIXct("2015/7/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
+  annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="Vaskess Bay")+
-  scale_y_continuous(name="Temperature (?C)",limits = c(28.3,30),expand=c(0,0))+
+           y=29.75, label="Vaskess Bay")+
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
   scale_color_manual(name=NULL, values = c(region.cols[["VaskessBay"]],region.cols[["VaskessBay_night"]]))+
   scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
                    labels=date_format('%b %Y'))
@@ -149,22 +149,31 @@ VB_sub <- plot_temps_daynight(vaskesbay_1d_wKim_sub,vaskesbay_night_wKim_1d_sub)
   
 SL_sub <- plot_temps_daynight(southlagoon_1d_wKim_sub,southlagoon_night_wKim_1d_sub)+
   # guides(color=FALSE)+
-  scale_y_continuous(name="Temperature (?C)",limits = c(28.3,30),expand=c(0,0))+
-annotate("text",x=as.POSIXct("2015/7/1 00:00:00",format="%Y/%m/%d %H:%M:%S",
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
+annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
                                tz="Pacific/Kiritimati"),
-           y=30.5, label="South Lagoon")+
+           y=29.75, label="South Lagoon")+
   scale_color_manual(name=NULL, values = c(region.cols[["SouthLagoon"]],region.cols[["SouthLagoon_night"]]))+
   scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
                    labels=date_format('%b %Y'))
 
 
+LF_sub <- plot_temps_daynight(lagoonface_1d_wKim_sub,lagoonface_night_wKim_1d_sub)+
+  # guides(color=FALSE)+
+  scale_y_continuous(name="Temperature (°C)",limits = c(28.3,30),expand=c(0,0))+
+  annotate("text",x=as.POSIXct("2015/5/19 00:00:00",format="%Y/%m/%d %H:%M:%S",
+                               tz="Pacific/Kiritimati"),
+           y=29.75, label="Mid Lagoon")+
+  scale_color_manual(name=NULL, values = c(region.cols[["MidLagoon"]],region.cols[["MidLagoon_night"]]))+
+  scale_x_datetime(name="Date", expand=c(0,0),breaks=date_breaks("1 month"),
+                   labels=date_format('%b %Y'))
 
 
-pdf(file = "figures/KI_insitu_daynight_temps_subset.pdf", width = 7.5, height = 10, useDingbats = FALSE)
-grid.arrange(VB_sub,SL_sub,NL_sub,NS_sub,BOW_sub, nrow=5)
+pdf(file = "figures/KI_insitu_daynight_temps_subset.pdf", width = 12, height = 8, useDingbats = FALSE)
+grid.arrange(VB_sub,SL_sub,LF_sub,NL_sub,NS_sub,BOW_sub, nrow=3, ncol=2)
 dev.off()
 
-jpeg(filename = "figures/KI_insitu_daynight_temps_subset.jpg", width = 7.5, height = 10, units="in",res = 300)
-grid.arrange(VB_sub,SL_sub,NL_sub,NS_sub,BOW_sub, nrow=5)
+jpeg(filename = "figures/KI_insitu_daynight_temps_subset.jpg", width = 12, height = 8, units="in",res = 300)
+grid.arrange(VB_sub,SL_sub,LF_sub,NL_sub,NS_sub,BOW_sub, nrow=3, ncol=2)
 dev.off()
 
