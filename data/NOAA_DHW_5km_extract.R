@@ -165,6 +165,35 @@ dhw_northlagoon$date <- as.POSIXct(dhw_northlagoon$date,format="%Y%m%d")
 dhw_northlagoon_max <- max(dhw_northlagoon$dhw)
 dhw_northlagoon[which(dhw_northlagoon$dhw==max(dhw_northlagoon$dhw)),]
 
+######################################
+
+LonIdx <- 450 # Lagoon Face -157.50
+LatIdx <- 1760 # Lagoon Face 2.00
+
+dhwlist <- list()
+for (i in files) {
+  # Open the netcdf file
+  nc <- nc_open(i)
+  dhwlist[[i]] <- ncvar_get( nc, "degree_heating_week")[LonIdx, LatIdx]
+  # Close the netcdf file --!!IMPORTANT!! otherwise you might corrupt your netcfd file
+  nc_close(nc)
+  print(i)
+  Sys.sleep(0.01)
+  flush.console()
+}
+
+dhw <- do.call(rbind, dhwlist)
+dhw_lagoonface <- data.frame(dhw)
+
+dhw_lagoonface$date <- rownames(dhw_lagoonface)
+dhw_lagoonface$date <- gsub(x = dhw_lagoonface$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
+dhw_lagoonface$date <- gsub(x = dhw_lagoonface$date,pattern=".nc",replacement = "")
+dhw_lagoonface$date <- as.POSIXct(dhw_lagoonface$date,format="%Y%m%d")
+
+dhw_lagoonface_max <- max(dhw_lagoonface$dhw)
+dhw_lagoonface[which(dhw_lagoonface$dhw==max(dhw_lagoonface$dhw)),]
+
+##############
 dhw_region <- merge(dhw_northshore,dhw_vaskess, by="date",
                   suffixes = c("_northshore","_vaskess"))
 dhw_region <- merge(dhw_region, dhw_southlagoon, by="date")
@@ -173,6 +202,8 @@ dhw_region <- merge(dhw_region, dhw_northlagoon, by="date")
 colnames(dhw_region)[5] <- "dhw_northlagoon"
 dhw_region <- merge(dhw_region, dhw_BOW, by="date")
 colnames(dhw_region)[6] <- "dhw_BOW"
+dhw_region <- merge(dhw_region, dhw_lagoonface, by="date")
+colnames(dhw_region)[6] <- "dhw_lagoonface"
 
 # Remove unneccessary objects
 rm(dhw,dhw_full,nc,dhwlist,nc,i,lat,lon,LatIdx,LonIdx,nlat,nlon)
