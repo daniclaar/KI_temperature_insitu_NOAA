@@ -30,6 +30,7 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 northlagoon_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(northlagoon_1hr)
+northlagoon_1hr_wKim <- northlagoon_1hr
 
 indivlogger <- paste(southlagoon,"$temperature_1hr",collapse=",",sep = "")
 evalstr <- paste("temperature_1hr <- cbind(",indivlogger,")")
@@ -38,6 +39,7 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 southlagoon_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(southlagoon_1hr)
+southlagoon_1hr_wKim <- southlagoon_1hr
 
 indivlogger <- paste(lagoonface,"$temperature_1hr",collapse=",",sep = "")
 evalstr <- paste("temperature_1hr <- cbind(",indivlogger,")")
@@ -46,6 +48,7 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 lagoonface_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(lagoonface_1hr)
+lagoonface_1hr_wKim <- lagoonface_1hr
 
 indivlogger <- paste(northshore,"$temperature_1hr",collapse=",",sep = "")
 evalstr <- paste("temperature_1hr <- cbind(",indivlogger,")")
@@ -54,6 +57,7 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 northshore_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(northshore_1hr)
+northshore_1hr_wKim <- northshore_1hr
 
 indivlogger <- paste(bayofwrecks,"$temperature_1hr",collapse=",",sep = "")
 evalstr <- paste("temperature_1hr <- cbind(",indivlogger,")")
@@ -62,6 +66,8 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 bayofwrecks_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(bayofwrecks_1hr)
+bayofwrecks_1hr_wKim <- bayofwrecks_1hr
+
 
 indivlogger <- paste(vaskesbay,"$temperature_1hr",collapse=",",sep = "")
 evalstr <- paste("temperature_1hr <- cbind(",indivlogger,")")
@@ -70,6 +76,7 @@ temperature_1hr <- rowMeans(temperature_1hr,na.rm=TRUE)
 vaskesbay_1hr<-cbind.data.frame(xi2,temperature_1hr)
 rm(temperature_1hr)
 plot(vaskesbay_1hr)
+vaskesbay_1hr_wKim <- vaskesbay_1hr
 
 
 #####
@@ -360,3 +367,11 @@ save(vaskesbay_1d_wKim,vaskesbay_night_wKim_1d,
      northshore_1d_wKim,northshore_night_wKim_1d,
      bayofwrecks_1d_wKim,bayofwrecks_night_wKim_1d,
      file = "data/KI_SB_temp_wKim_1d.RData")
+
+save(vaskesbay_1hr_wKim,
+     southlagoon_1hr_wKim,
+     lagoonface_1hr_wKim,
+     northlagoon_1hr_wKim,
+     northshore_1hr_wKim,
+     bayofwrecks_1hr_wKim,
+     file = "data/KI_SB_temp_wKim_1hr.RData")
