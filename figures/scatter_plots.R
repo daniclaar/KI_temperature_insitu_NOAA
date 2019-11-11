@@ -114,10 +114,10 @@ LF_scatter <- ggplot(data = LF,aes(x=insitu_temp,y=sat_temp,color=insitu_temp))+
   annotate("text",x=26,y=30.75, label="Mid Lagoon")
 
            
-jpeg(filename = "figures/scatter_plots.jpg",width = 6, height=8, units="in",res=300)
+jpeg(filename = "figures/scatter_plot/scatter_plots.jpg",width = 6, height=8, units="in",res=300)
 grid.arrange(VB_scatter,SL_scatter,LF_scatter,NL_scatter,NS_scatter,BOW_scatter)
 dev.off()
 
-pdf(file = "figures/scatter_plots.pdf",width = 6, height=8, useDingbats = FALSE)
+pdf(file = "figures/scatter_plot/scatter_plots.pdf",width = 6, height=8, useDingbats = FALSE)
 grid.arrange(VB_scatter,SL_scatter,LF_scatter,NL_scatter,NS_scatter,BOW_scatter)
 dev.off()
