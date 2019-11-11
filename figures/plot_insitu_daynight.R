@@ -85,7 +85,7 @@ LF <- plot_temps_daynight(lagoonface_1d_wKim,lagoonface_night_wKim_1d)+
            y=30.5, label="South Lagoon")
 
 
-pdf(file = "figures/KI_insitu_daynight_temps.pdf", width = 7.5, height = 10, useDingbats = FALSE)
+pdf(file = "figures/day_night/KI_insitu_daynight_temps.pdf", width = 7.5, height = 10, useDingbats = FALSE)
 grid.arrange(VB,SL,LF,NL,NS,BOW, nrow=3, ncol=2)
 dev.off()
 
@@ -169,11 +169,11 @@ LF_sub <- plot_temps_daynight(lagoonface_1d_wKim_sub,lagoonface_night_wKim_1d_su
                    labels=date_format('%b %Y'))
 
 
-pdf(file = "figures/KI_insitu_daynight_temps_subset.pdf", width = 12, height = 8, useDingbats = FALSE)
+pdf(file = "figures/day_night/KI_insitu_daynight_temps_subset.pdf", width = 12, height = 8, useDingbats = FALSE)
 grid.arrange(VB_sub,SL_sub,LF_sub,NL_sub,NS_sub,BOW_sub, nrow=3, ncol=2)
 dev.off()
 
-jpeg(filename = "figures/KI_insitu_daynight_temps_subset.jpg", width = 12, height = 8, units="in",res = 300)
+jpeg(filename = "figures/day_night/KI_insitu_daynight_temps_subset.jpg", width = 12, height = 8, units="in",res = 300)
 grid.arrange(VB_sub,SL_sub,LF_sub,NL_sub,NS_sub,BOW_sub, nrow=3, ncol=2)
 dev.off()
 
