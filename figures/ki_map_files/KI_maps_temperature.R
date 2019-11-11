@@ -22,7 +22,7 @@ sites$col<-region.cols$region.cols[match(sites$region, region.cols$region)]
 levels(sites$region) <- c("Vaskess Bay", "South Lagoon", "Mid Lagoon",
                           "North Lagoon", "North Shore", "Bay of Wrecks")
 
-pdf(file="figures/KI_map_temperature_sites_inset_bigger.pdf", width = 7.5, height =7,
+pdf(file="figures/maps/KI_map_temperature_sites_inset_bigger.pdf", width = 7.5, height =7,
     useDingbats = FALSE)
 source("figures/ki_map_files/KI_base_B&W_bigger.R")
 
@@ -37,7 +37,7 @@ source("figures/ki_map_files/KI_base_inset_forbigger.R")
 
 dev.off()
 
-jpeg(filename = "figures/KI_map_temperature_sites_inset_bigger.jpg", width = 7.5, height =7, units="in", res=300)
+jpeg(filename = "figures/maps/KI_map_temperature_sites_inset_bigger.jpg", width = 7.5, height =7, units="in", res=300)
 source("figures/ki_map_files/KI_base_B&W_bigger.R")
 
 points(sites$lon, sites$lat, bg=alpha(sites$col,0.8), pch=21, cex=1.4) 
