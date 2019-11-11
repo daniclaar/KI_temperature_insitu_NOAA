@@ -76,7 +76,7 @@ p <- matrix(0.05,12,12)
 # p[11,7] <- 1
 
 # Create pdf of correlation plot
-pdf(file = "figures/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
+pdf(file = "figures/correlation/corr_plot.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -86,7 +86,7 @@ corrplot.mixed(corr, upper = "circle",
                p.mat=p,sig.level=0.05,pch.col="darkgray",pch.cex=3)
 dev.off()
 
-jpeg(filename = "figures/corr_plot.jpg",width=8,height=7,units="in",res=300)
+jpeg(filename = "figures/correlation/corr_plot.jpg",width=8,height=7,units="in",res=300)
 corrplot.mixed(corr, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -117,7 +117,7 @@ rownames(corr2) <- c("Vaskess Bay (S)", "South Lagoon (S)",
                     "North Lagoon (I)",
                     "North Shore (I)","Bay of Wrecks (I)")
 
-pdf(file = "figures/corr_plot_2011to2013_noVaskessInoLagoonFaceI.pdf",width=8,height=7,useDingbats = FALSE)
+pdf(file = "figures/correlation/corr_plot_2011to2013_noVaskessInoLagoonFaceI.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr2, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -127,7 +127,7 @@ corrplot.mixed(corr2, upper = "circle",
                pch.col="darkgray",pch.cex=3)
 dev.off()
 
-jpeg(filename = "figures/corr_plot_2011to2013_noVaskessInoLagoonFaceI.jpg",width=8,height=7,units="in",res=300)
+jpeg(filename = "figures/correlation/corr_plot_2011to2013_noVaskessInoLagoonFaceI.jpg",width=8,height=7,units="in",res=300)
 corrplot.mixed(corr2, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -159,7 +159,7 @@ rownames(corr3) <- c("Vaskess Bay (S)", "South Lagoon (S)",
                      "Mid Lagoon (I)","North Lagoon (I)",
                      "Bay of Wrecks (I)")
 
-pdf(file = "figures/corr_plot_2015to2016_noNorthShoreI.pdf",width=8,height=7,useDingbats = FALSE)
+pdf(file = "figures/correlation/corr_plot_2015to2016_noNorthShoreI.pdf",width=8,height=7,useDingbats = FALSE)
 corrplot.mixed(corr3, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
@@ -169,7 +169,7 @@ corrplot.mixed(corr3, upper = "circle",
                pch.col="darkgray",pch.cex=3)
 dev.off()
 
-jpeg(filename = "figures/corr_plot_2015to2016_noNorthShoreI.jpg",width=8,height=7,units="in",res=300)
+jpeg(filename = "figures/correlation/corr_plot_2015to2016_noNorthShoreI.jpg",width=8,height=7,units="in",res=300)
 corrplot.mixed(corr3, upper = "circle",  
                lower.col = colorRampPalette(c("blue","yellow", "red"))(20),
                number.cex = 0.85,tl.pos = "lt",
