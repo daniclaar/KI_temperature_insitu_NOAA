@@ -1,6 +1,12 @@
+# Prepare KCobb data 
+
+#Clear working directory
 rm(list=ls())
+
+# Load necessary data
 load("data/SeaBird_KCobb_trimmed.RData")
 
+#Load necessary packages
 library(iemisc)
 
 loggers <- ls()

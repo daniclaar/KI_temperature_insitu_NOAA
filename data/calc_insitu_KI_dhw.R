@@ -1,6 +1,6 @@
-###################################################################################
-################# CALCULATE DHW FOR ALL SITES AND REGIONS #########################
-###################################################################################
+################################################################################
+################# CALCULATE DHW FOR ALL SITES AND REGIONS ######################
+################################################################################
 # Clear R environment
 rm(list=ls())
 
@@ -69,7 +69,7 @@ temperature_halfwk <- colMeans(tempmatrix,na.rm=TRUE)
 vaskesbay_halfwk<-cbind.data.frame(xi4,temperature_halfwk)
 rm(temperature_halfwk)
 
-###################################################################################
+################################################################################
 ## Now calculate the hotspot for all regions
 # Set the MMM temperature (i.e. the mean monthly maximum, from NOAA)
 MMM_NOAA_VB <- MMM_all[6]

@@ -1,5 +1,12 @@
+# Calculate the mean SST across regions
+
+# Clear working environment
 rm(list=ls())
+
+# Load necessary data
 load("data/NOAA_CoralTemp_2011_2018.RData")
+
+# View data
 head(sst_region)
 
 sst_mean <- rowMeans(sst_region[2:7])
