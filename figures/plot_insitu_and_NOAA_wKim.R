@@ -102,14 +102,14 @@ LF2 <- plot_temps(lagoonface_1d_wKim,sst_lagoonface)+
   scale_color_manual(name=NULL, values = c(region.cols[["MidLagoon"]],"gray50"))
 
 
-pdf(file = "figures/KI_insitu_satellite_temps_wKim.pdf", width = 9.5, height = 9, useDingbats = FALSE)
-grid.arrange(VB,SL,LF,NL,NS,BOW, layout_matrix = rbind(c(NA, 3),
-                                                       c(NA, 4),
-                                                       c(1, 5),
-                                                       c(2, 6)))
-dev.off()
+# pdf(file = "figures/insitu_satellite/KI_insitu_satellite_temps_wKim.pdf", width = 9.5, height = 9, useDingbats = FALSE)
+# grid.arrange(VB,SL,LF,NL,NS,BOW, layout_matrix = rbind(c(NA, 3),
+#                                                        c(NA, 4),
+#                                                        c(1, 5),
+#                                                        c(2, 6)))
+# dev.off()
 
-pdf(file = "figures/KI_insitu_satellite_temps_v2_wKim.pdf", width = 9.5, height = 9, useDingbats = FALSE)
+pdf(file = "figures/insitu_satellite/KI_insitu_satellite_temps_v2_wKim.pdf", width = 9.5, height = 9, useDingbats = FALSE)
 grid.arrange(VB2,SL2,LF2,NL2,NS2,BOW2, layout_matrix = rbind(c(NA, 3),
                                                              c(NA, 4),
                                                              c(1, 5),

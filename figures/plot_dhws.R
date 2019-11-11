@@ -190,7 +190,7 @@ InSitu_DHW <- ggplot(data=DHW_all)+
                                tz="Pacific/Kiritimati"),y=26, label="In Situ")
 
 
-pdf(file = "figures/KI_DHWs.pdf", width = 9.5, height = 10, useDingbats = FALSE)
+pdf(file = "figures/DHW/KI_DHWs.pdf", width = 9.5, height = 10, useDingbats = FALSE)
 grid.arrange(NOAA_DHW,InSitu_DHW,VB_DHW,NL_DHW,SL_DHW,
              NS_DHW,LF_DHW,BOW_DHW, layout_matrix = rbind(c(1, 2),
                                                           c(3, 4),
@@ -198,7 +198,7 @@ grid.arrange(NOAA_DHW,InSitu_DHW,VB_DHW,NL_DHW,SL_DHW,
                                                           c(7, 8)))
 dev.off()
 
-jpeg(filename = "figures/KI_DHWs.jpg", width = 9.5, height = 10, units="in", res=300)
+jpeg(filename = "figures/DHW/KI_DHWs.jpg", width = 9.5, height = 10, units="in", res=300)
 grid.arrange(NOAA_DHW,InSitu_DHW,VB_DHW,NL_DHW,SL_DHW,
              NS_DHW,LF_DHW,BOW_DHW, layout_matrix = rbind(c(1, 2),
                                                           c(3, 4),
@@ -206,23 +206,23 @@ grid.arrange(NOAA_DHW,InSitu_DHW,VB_DHW,NL_DHW,SL_DHW,
                                                           c(7, 8)))
 dev.off()
 
-jpeg(filename = "figures/KI_DHWs2.jpg", width = 9.5, height = 7.5, units="in", res=300)
+jpeg(filename = "figures/DHW/KI_DHWs2.jpg", width = 9.5, height = 7.5, units="in", res=300)
 grid.arrange(VB_DHW,NL_DHW,SL_DHW,
              NS_DHW,LF_DHW,BOW_DHW, layout_matrix = rbind(c(1, 2),
                                                           c(3, 4),
                                                           c(5, 6)))
 dev.off()
 
-jpeg(filename = "figures/KI_DHWs_supplementary.jpg", width = 9.5, height = 2.5, units="in", res=300)
+jpeg(filename = "figures/DHW/KI_DHWs_supplementary.jpg", width = 9.5, height = 2.5, units="in", res=300)
 grid.arrange(NOAA_DHW,InSitu_DHW,ncol=2)
 dev.off()
 
-pdf(file = "figures/KI_DHWs_supplementary.pdf", width = 9.5, height = 2.5)
+pdf(file = "figures/DHW/KI_DHWs_supplementary.pdf", width = 9.5, height = 2.5)
 grid.arrange(NOAA_DHW,InSitu_DHW,ncol=2)
 dev.off()
 
 
-pdf(file = "figures/KI_DHWs2.pdf", width = 9.5, height = 7.5)
+pdf(file = "figures/DHW/KI_DHWs2.pdf", width = 9.5, height = 7.5)
 grid.arrange(VB_DHW,NL_DHW,SL_DHW,
              NS_DHW,LF_DHW,BOW_DHW, layout_matrix = rbind(c(1, 2),
                                                           c(3, 4),
