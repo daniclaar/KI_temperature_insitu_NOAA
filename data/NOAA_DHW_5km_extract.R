@@ -9,20 +9,19 @@ require(svMisc)
 # Clear the working environment
 rm(list=ls())
 
-latlon <- read.csv("data/region_latlons.csv")
 files=list.files("data/NOAA_DHW_3.1/",full.names = TRUE)
 
-#Testing: Need to check if this works
-nc <- nc_open("data/NOAA_DHW_3.1/ct5km_dhw_v3.1_20110101.nc")
-dhw_full <- ncvar_get( nc, "degree_heating_week")
-# get longitude and latitude
-lon <- ncvar_get(nc,"lon")
-nlon <- dim(lon)
-head(lon)
-lat <- ncvar_get(nc,"lat")
-nlat <- dim(lat)
-head(lat)
-nc_close(nc)
+# #Testing: Need to check if this works
+# nc <- nc_open("data/NOAA_DHW_3.1/ct5km_dhw_v3.1_20110101.nc")
+# dhw_full <- ncvar_get( nc, "degree_heating_week")
+# # get longitude and latitude
+# lon <- ncvar_get(nc,"lon")
+# nlon <- dim(lon)
+# head(lon)
+# lat <- ncvar_get(nc,"lat")
+# nlat <- dim(lat)
+# head(lat)
+# nc_close(nc)
 
 ##########################################HIGH#################################
 
@@ -209,7 +208,7 @@ colnames(dhw_region)[6] <- "dhw_lagoonface"
 rm(dhw,dhw_full,nc,dhwlist,nc,i,lat,lon,LatIdx,LonIdx,nlat,nlon)
 
 # Take the mean of all 5 regions 
-dhw_mean_KI <- data.frame("date"=dhw_region$date, "dhw"=rowMeans(dhw_region[,c(2:6)]))
+dhw_mean_KI <- data.frame("date"=dhw_region$date, "dhw"=rowMeans(dhw_region[,c(2:6)]))skype
 
 #Save RData file for downstream use
 save.image(file="data/NOAA_DHW_5km.RData")
