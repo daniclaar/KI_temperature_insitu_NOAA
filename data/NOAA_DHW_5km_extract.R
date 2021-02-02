@@ -6,13 +6,14 @@ library(lattice)
 library(RColorBrewer)
 require(svMisc)
 
-# Clear the working environment
-rm(list=ls())
+# Make a list of files to extract data from
+data_dir <- "data/NOAA_DHW_3.1/" # PUT YOUR LOCATION OF THE NOAA DATA HERE
+files=list.files("data_dir",full.names = TRUE)
 
-files=list.files("data/NOAA_DHW_3.1/",full.names = TRUE)
-
-#Testing: Need to check if this works
-nc <- nc_open("../KI_temperature_insitu_NOAA/data/NOAA_DHW_3.1/ct5km_dhw_v3.1_19850327.nc")
+## Test on one file to make sure it works:
+## I recommend doing this to make sure the function below will work the way you expect it to. You'll have to change the file name/path and change "analyzed_sst" to whatever the DHW variable name is
+testfile <- paste0(data_dir,"ct5km_dhw_v3.1_19850327.nc") # This is a file you expect to be in your data directory. Change the name in quotes if you don't expect to have this particular file for testing
+nc <- nc_open(testfile)
 dhw_full <- ncvar_get( nc, "degree_heating_week")
 # get longitude and latitude
 lon <- ncvar_get(nc,"lon")
@@ -21,14 +22,15 @@ head(lon)
 lat <- ncvar_get(nc,"lat")
 nlat <- dim(lat)
 head(lat)
-nc_close(nc)
+nc_close(nc) # THIS IS IMPORTANT, OR YOU WILL CORRUPT YOUR FILES
 
 ##########################################HIGH#################################
 
+# Extract data for Kiritimati Northshore (-157.425, 2.025)
 LonIdx <- 452 # Northshore -157.45
 LatIdx <- 1760 # Northshore 2.025 
 
-
+# Function for extracting data from one lat/lon from multiple files - e.g. over time for one particular site
 dhwlist <- list()
 for (i in files) {
 # Open the netcdf file
@@ -41,15 +43,21 @@ Sys.sleep(0.01)
 flush.console()
 }
 
+# Rowbind data from all files
 dhw <- do.call(rbind, dhwlist)
+# Make it into a data frame for downstream use
 dhw_northshore <- data.frame(dhw)
+# Now you have a time series of extracted data
 
 dhw_northshore$date <- rownames(dhw_northshore)
-dhw_northshore$date <- gsub(x = dhw_northshore$date,pattern="data/NOAA_DHW_3.1/ct5km_dhw_v3.1_",replacement = "")
+filepattern <- paste0(data_dir,"ct5km_dhw_v3.1_")
+dhw_northshore$date <- gsub(x = dhw_northshore$date,pattern=filepattern,replacement = "")
 dhw_northshore$date <- gsub(x = dhw_northshore$date,pattern=".nc",replacement = "")
 dhw_northshore$date <- as.POSIXct(dhw_northshore$date,format="%Y%m%d")
 
+# Calculate maximum DHW at this site
 dhw_northshore_max <- max(dhw_northshore$dhw)
+# Determine which date max DHW occurred at
 dhw_northshore[which(dhw_northshore$dhw==max(dhw_northshore$dhw)),]
 
 ##################################LOW##################
@@ -193,6 +201,7 @@ dhw_lagoonface_max <- max(dhw_lagoonface$dhw)
 dhw_lagoonface[which(dhw_lagoonface$dhw==max(dhw_lagoonface$dhw)),]
 
 ##############
+# Merge all regions into one data frame
 dhw_region <- merge(dhw_northshore,dhw_vaskess, by="date",
                   suffixes = c("_northshore","_vaskess"))
 dhw_region <- merge(dhw_region, dhw_southlagoon, by="date")
